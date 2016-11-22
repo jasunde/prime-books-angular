@@ -1,14 +1,14 @@
 var myApp = angular.module("myApp", [])
 .filter('unique', function() {
 return function (arr, field) {
- var o = {}, i, l = arr.length, r = [];
- for(i=0; i<l;i+=1) {
-   o[arr[i][field]] = arr[i];
+ var object = {}, index, property, l = arr.length, uniqueField = [];
+ for(index=0; index<l;index+=1) {
+   object[arr[index][field]] = arr[index];
  }
- for(i in o) {
-   r.push(o[i]);
+ for(property in object) {
+   uniqueField.push(object[property]);
  }
- return r;
+ return uniqueField;
 };
 })
 
