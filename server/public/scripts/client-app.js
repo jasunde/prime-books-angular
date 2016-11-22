@@ -1,6 +1,18 @@
-var myApp = angular.module("myApp", []);
+var myApp = angular.module("myApp", [])
+.filter('unique', function() {
+return function (arr, field) {
+ var o = {}, i, l = arr.length, r = [];
+ for(i=0; i<l;i+=1) {
+   o[arr[i][field]] = arr[i];
+ }
+ for(i in o) {
+   r.push(o[i]);
+ }
+ return r;
+};
+})
 
-myApp.controller("BookController", ["$http", function($http) {
+myApp.controller("BookController", ["$http", 'uniqueFilter', function($http, uniqueFilter) {
   console.log('running');
 
   var self = this;
@@ -10,6 +22,7 @@ myApp.controller("BookController", ["$http", function($http) {
   self.query = "";
 
   getBooks();
+
 
   // read only
   function getBooks() {

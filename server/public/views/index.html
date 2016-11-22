@@ -49,8 +49,10 @@
       </form>
 
       <h2>Books</h2>
-      <select ng-model="bookController.query" >
-        <option value="{{genre.genre}}" ng-repeat="genre in bookController.genres">{{genre.genre}}</option>
+
+      <select class= "form-control" ng-model="bookController.query" >
+        <option value="">Select genre</option>
+        <option value="{{book.genre}}" ng-repeat="book in bookController.books | unique:'genre'">{{book.genre}}</option>
       </select>
       {{BookController.query}}
       <div class="book" ng-repeat="book in bookController.books | filter: bookController.query">
