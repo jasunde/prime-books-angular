@@ -6,6 +6,8 @@ myApp.controller("BookController", ["$http", function($http) {
   var self = this;
   self.newBook = {};
   self.books = [];
+  self.genres = [];
+  self.query = "";
 
   getBooks();
 
@@ -19,6 +21,8 @@ myApp.controller("BookController", ["$http", function($http) {
           book.published = new Date(book.published);
         });
       });
+      getGenres();
+
   }
 
   // tied to DOM thru self object
@@ -48,6 +52,13 @@ myApp.controller("BookController", ["$http", function($http) {
       })
   }
 
+  function getGenres() {
+    $http.get('/books/genre')
+      .then(function (response) {
+        console.log(response);
+        self.genres = response.data;
+      })
+  }
 
 
 }]);
