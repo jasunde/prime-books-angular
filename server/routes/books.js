@@ -3,27 +3,6 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/sigma';
 
-router.get('/genre', function(req, res) {
-  pg.connect(connectionString, function (err, client, done) {
-    if(err) {
-      console.log('connection error:', err);
-    }
-
-    client.query('SELECT DISTINCT genre FROM books', function (err, result) {
-      done();
-
-      if(err){
-        console.log('select query error: ', err);
-        res.sendStatus(500);
-
-      }
-      res.send(result.rows);
-
-
-    });
-  })
-
-});
 
 router.get('/', function(req, res) {
   console.log('message on REC: ', req.message);
@@ -36,8 +15,6 @@ router.get('/', function(req, res) {
 
     client.query('SELECT * FROM books', function(err, result) {
       done(); // close the connection.
-
-      // console.log('the client!:', client);
 
       if(err) {
         console.log('select query error: ', err);

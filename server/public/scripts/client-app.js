@@ -34,8 +34,6 @@ myApp.controller("BookController", ["$http", 'uniqueFilter', function($http, uni
           book.published = new Date(book.published);
         });
       });
-      getGenres();
-
   }
 
   // tied to DOM thru self object
@@ -62,14 +60,6 @@ myApp.controller("BookController", ["$http", 'uniqueFilter', function($http, uni
       .then(function(response){
         console.log('PUT successful');
         getBooks();
-      })
-  }
-
-  function getGenres() {
-    $http.get('/books/genre')
-      .then(function (response) {
-        console.log(response);
-        self.genres = response.data;
       })
   }
 
