@@ -15,6 +15,9 @@ myApp.controller("BookController", ["$http", function($http) {
       .then(function(response) {
         console.log(response.data);
         self.books = response.data;
+        self.books.forEach(function(book){
+          book.published = new Date(book.published);
+        });
       });
   }
 
@@ -28,9 +31,24 @@ myApp.controller("BookController", ["$http", function($http) {
       });
   }
 
-  self.clickMe = function(bookObj) {
-    console.log(bookObj);
+  self.deleteBook= function(book) {
+    console.log(book);
+    $http.delete('/books/'+book.id)
+      .then(function(response){
+        console.log('DELETE successful');
+        getBooks();
+      });
   }
+
+  self.updateBook = function(book){
+    $http.put('/books/'+book.id , book )
+      .then(function(response){
+        console.log('PUT successful');
+        getBooks();
+      })
+  }
+
+
 
 }]);
 
